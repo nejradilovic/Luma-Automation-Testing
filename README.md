@@ -7,6 +7,7 @@ Automated testing suite for the Luma web application, developed as part of the A
 - **`test/`** - Main folder containing all test-related files.
   - **`specs/`** - Contains individual test scripts written with Jasmine for various functionalities of the Luma application.
   - **`pageobjects/`** - Holds Page Object files that represent different pages within the Luma application. Each file includes methods and elements for interacting with specific page elements.
+  - **`data/`** - Contains test data files for scenarios, such as login credentials, product details, and other necessary inputs.
 - **`allure-results/`** - Directory where Allure test result files are generated after running tests.
 
 ## Tools & Frameworks
