@@ -4,10 +4,10 @@ const testData = {
     lastName: "Adilović",
     email: "nejradilovic@atlant.com",
     password: "Pass123!.",
-    streetAddress: "Muhameda Hadzijahica 37",
+    streetAddress: " Milana Preloga 12A",
     city: "Sarajevo",
     postalCode: "71000",
-    phoneNumber: "062877807",
+    phoneNumber: "061123345",
     country: "Bosnia & Herzegovina",
   },
   product: {
