@@ -36,8 +36,8 @@ describe("Smoke Test - Product Purchase Flow", () => {
     await ProductPage.setProductQuantity(quantity);
     await ProductPage.addToCart();
 
-    const successMessage = await ProductPage.isProductAddedToCart();
-    expect(successMessage).toContain("You added");
+    const productAdded = await ProductPage.isProductAddedToCart();
+    expect(productAdded).toBe(true);    
 
     await ProductPage.cartIcon.click();
     await ProductPage.proceedToCheckoutButton.click();

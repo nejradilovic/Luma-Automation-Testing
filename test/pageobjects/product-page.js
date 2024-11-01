@@ -2,7 +2,6 @@ const { $ } = require("@wdio/globals");
 const Page = require("./page");
 
 class ProductPage extends Page {
-  
   get productTitle() {
     return $("//span[@class='base' and @data-ui-id='page-title-wrapper']");
   }
@@ -59,7 +58,8 @@ class ProductPage extends Page {
 
   async isProductAddedToCart() {
     await this.cartSuccessMessage.waitForDisplayed();
-    return this.cartSuccessMessage.getText();
+    const messageText = await this.cartSuccessMessage.getText();
+    return messageText.includes("You added");
   }
 }
 
