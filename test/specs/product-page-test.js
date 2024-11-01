@@ -1,7 +1,7 @@
 const { expect } = require("@wdio/globals");
-const ProductPage = require("../pageobjects/product.page");
-const HomePage = require("../pageobjects/home.page");
-const testData = require("../data/testData");
+const ProductPage = require("../pageobjects/product-page");
+const HomePage = require("../pageobjects/home-page");
+const testData = require("../data/test-data");
 
 describe("Product Page Tests", () => {
   it("should select product size, color, set quantity, and add to cart", async () => {

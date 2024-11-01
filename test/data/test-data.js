@@ -2,8 +2,8 @@ const testData = {
   user: {
     firstName: "Nejra",
     lastName: "Adilović",
-    email: "[valid_email]",
-    password: "[valid_password]",
+    email: "nejradilovic@atlant.com",
+    password: "Pass123!.",
     streetAddress: " Milana Preloga 12A",
     city: "Sarajevo",
     postalCode: "71000",

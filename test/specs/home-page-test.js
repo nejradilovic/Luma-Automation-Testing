@@ -1,7 +1,7 @@
 const { expect } = require("@wdio/globals");
-const HomePage = require("../pageobjects/home.page");
-const LoginPage = require("../pageobjects/login.page");
-const testData = require("../data/testData");
+const HomePage = require("../pageobjects/home-page");
+const LoginPage = require("../pageobjects/login-page");
+const testData = require("../data/test-data");
 
 describe("Home Page Tests", () => {
   beforeEach(async () => {

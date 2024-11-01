@@ -5,8 +5,8 @@ const {
   ShippingPage,
   PaymentsPage,
   SuccessPage,
-} = require("../pageobjects/pageObjects");
-const testData = require("../data/testData");
+} = require("../pageobjects/page-objects");
+const testData = require("../data/test-data");
 
 describe("Smoke Test - Product Purchase Flow", () => {
   it("should log into a valid account", async () => {
@@ -58,7 +58,7 @@ describe("Smoke Test - Product Purchase Flow", () => {
     await SuccessPage.continueShoppingButton.waitForClickable();
 
     const confirmationMessage =
-      await SuccessPage.spanThankYouMeassage.getText();
+      await SuccessPage.spanThankYouMessage.getText();
     expect(confirmationMessage).toContain("Thank you for your purchase!");
   });
 });

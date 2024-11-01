@@ -6,7 +6,7 @@ class SuccessPage extends Page {
     return super.open("");
   }
 
-  get spanThankYouMeassage() {
+  get spanThankYouMessage() {
     return $("//span[@class='base' and @data-ui-id='page-title-wrapper']");
   }
   get continueShoppingButton() {

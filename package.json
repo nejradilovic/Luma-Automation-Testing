@@ -313,5 +313,5 @@
     "yoctocolors-cjs": "^2.1.2",
     "zip-stream": "^6.0.1"
   },
-  "description": ""
+  "description": "Automated testing suite for the Luma web application, developed as part of the Atlantbh Internship 2024 program. This project utilizes JavaScript, Selenium, WebdriverIO, and Jasmine to ensure the reliability and performance of the Luma application."
 }
