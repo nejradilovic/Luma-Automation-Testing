@@ -2,8 +2,8 @@ const testData = {
   user: {
     firstName: "Nejra",
     lastName: "Adilović",
-    email: "nejradilovic@atlant.com",
-    password: "Pass123!.",
+    email: "[valid_email]",
+    password: "[valid_password]",
     streetAddress: " Milana Preloga 12A",
     city: "Sarajevo",
     postalCode: "71000",
@@ -15,7 +15,7 @@ const testData = {
     size: "S",
     color: "Purple",
     quantity: 1,
-  },
+  }
 };
 
 module.exports = testData;

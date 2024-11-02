@@ -30,23 +30,12 @@ class LoginPage extends Page {
     return $("//div[@id='pass-error']");
   }
 
-  async login(email, password) {
-    await this.inputEmail.setValue(email);
-    await this.inputPassword.setValue(password);
-    await this.signInButton.click();
-  }
-
   async isEmailErrorDisplayed() {
     return await this.emailErrorMessage.isDisplayed();
   }
 
   async isPasswordErrorDisplayed() {
     return await this.passwordErrorMessage.isDisplayed();
-  }
-
-  async checkErrorMessage(messageSelector, expectedMessage) {
-    const message = await messageSelector.getText();
-    expect(message).toContain(expectedMessage);
   }
 }
 

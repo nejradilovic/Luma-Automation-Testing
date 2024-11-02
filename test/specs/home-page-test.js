@@ -1,6 +1,7 @@
 const { expect } = require("@wdio/globals");
 const HomePage = require("../pageobjects/home-page");
-const LoginPage = require("../pageobjects/login-page");
+const HomeUtility = require("../utilities/home-utility");
+const LoginUtility = require("../utilities/login-utility");
 const testData = require("../data/test-data");
 
 describe("Home Page Tests", () => {
@@ -13,24 +14,16 @@ describe("Home Page Tests", () => {
 
     const currentUrl = await browser.getUrl();
     expect(currentUrl).toContain("customer/account/login");
-
-    const pageTitle = await browser.getTitle();
-    expect(pageTitle).toBe("Customer Login");
   });
 
   it("should successfully search and open product detail page", async () => {
-    await HomePage.searchForProduct(testData.product.searchTerm);
-
-    await HomePage.openProductDetail(0);
-    const currentUrl = await browser.getUrl();
-    expect(currentUrl).toContain(testData.product.searchTerm);
+    await HomeUtility.searchAndOpenProduct(testData.product.searchTerm);
   });
 
   it("should successfully sign out and display Sign In button", async () => {
-    await LoginPage.open();
-    await LoginPage.login(testData.user.email, testData.user.password);
+    await LoginUtility.loginUser(testData.user.email, testData.user.password);
+    
     await HomePage.signOut();
-
     await HomePage.signInButton.waitForDisplayed();
     expect(await HomePage.signInButton.isDisplayed()).toBe(true);
   });

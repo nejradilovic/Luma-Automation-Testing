@@ -43,16 +43,14 @@ class HomePage extends Page {
   async signOut() {
     await this.welcomeDropdownButton.click();
     await this.signOutButton.click();
-    await browser.pause(1000);
   }
 
   async searchForProduct(productName, clickButton = false) {
     await this.searchBar.setValue(productName);
-    if (clickButton) {
+    if (clickButton) 
       await this.searchButton.click();
-    } else {
+    else 
       await browser.keys("Enter");
-    }
   }
 
   async openProductDetail(index) {
