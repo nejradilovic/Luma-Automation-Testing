@@ -10,6 +10,13 @@ const testData = {
     phoneNumber: "061123345",
     country: "Bosnia & Herzegovina",
   },
+  negativeUserCases: {
+    emptyEmail: "",
+    emptyPassword: "",
+    invalidEmailFormat: "invalid-email-format",
+    unregisteredEmail: "unregistered@testing.com",
+    incorrectPassword: "wrongPassword",
+  },
   product: {
     searchTerm: "jacket",
     size: "S",
