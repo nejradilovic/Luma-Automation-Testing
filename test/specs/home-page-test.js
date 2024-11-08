@@ -16,12 +16,19 @@ describe("Home Page Tests", () => {
     expect(currentUrl).toContain("customer/account/login");
   });
 
+  it("should navigate to Create Account page from Home Page", async () => {
+    await HomePage.navigateToCreateAccountPage();
+
+    const currentUrl = await browser.getUrl();
+    expect(currentUrl).toContain("customer/account/create");
+  });
+
   it("should successfully search and open product detail page", async () => {
     await HomeUtility.searchAndOpenProduct(testData.product.searchTerm);
   });
 
   it("should successfully sign out and display Sign In button", async () => {
-    await LoginUtility.loginUser(testData.user.email, testData.user.password);
+    await LoginUtility.loginUser(testData.existingUser.email, testData.existingUser.password);
     
     await HomePage.signOut();
     await HomePage.signInButton.waitForDisplayed();

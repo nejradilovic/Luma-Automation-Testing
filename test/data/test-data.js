@@ -1,21 +1,34 @@
 const testData = {
-  user: {
+  newUser: {
     firstName: "Nejra",
     lastName: "Adilović",
-    email: "[valid_email]",
-    password: "[valid_password]",
-    streetAddress: " Milana Preloga 12A",
+    email: `testuser${Date.now()}@example.com`,
+    password: "NewPass123!",
+    confirmPassword: "NewPass123!",
+    streetAddress: "Milana Preloga 12A",
     city: "Sarajevo",
     postalCode: "71000",
     phoneNumber: "061123345",
     country: "Bosnia & Herzegovina",
   },
-  negativeUserCases: {
-    emptyEmail: "",
-    emptyPassword: "",
+  existingUser: {
+    firstName: "Nejra",
+    lastName: "Adilović",
+    email: "[valid_email]",
+    password: "[valid_password]",
+    streetAddress: "Milana Preloga 12A",
+    city: "Sarajevo",
+    postalCode: "71000",
+    phoneNumber: "061123345",
+    country: "Bosnia & Herzegovina",
+  },
+  negativeTestCases: {
+    emptyField: "",
     invalidEmailFormat: "invalid-email-format",
     unregisteredEmail: "unregistered@testing.com",
     incorrectPassword: "wrongPassword",
+    shortPassword: "1234",
+    mismatchedConfirmPassword: "mismatchConfirmPassword"
   },
   product: {
     searchTerm: "jacket",

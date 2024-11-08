@@ -1,7 +1,6 @@
 const LoginPage = require("../pageobjects/login-page");
 const HomePage = require("../pageobjects/home-page");
 const testData = require("../data/test-data");
-const { error } = require("loglevel");
 
 class LoginUtility {
   async loginUser(email, password) {
@@ -14,7 +13,7 @@ class LoginUtility {
   async verifySuccessfulLogin() {
     await HomePage.welcomeMessage.waitForDisplayed();
     const welcomeMessage = await HomePage.welcomeMessage.getText();
-    expect(welcomeMessage).toBe(`Welcome, ${testData.user.firstName} ${testData.user.lastName}!`);
+    expect(welcomeMessage).toBe(`Welcome, ${testData.existingUser.firstName} ${testData.existingUser.lastName}!`);
   }
 
   async verifyRequiredFieldErrors() {
