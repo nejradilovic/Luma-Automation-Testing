@@ -1,4 +1,4 @@
-const { $ } = require("@wdio/globals");
+const { $, browser } = require("@wdio/globals");
 const Page = require("./page");
 
 class ProductPage extends Page {
@@ -7,15 +7,11 @@ class ProductPage extends Page {
   }
 
   getProductSizeElement(size) {
-    return $(
-      `//div[contains(@class, 'swatch-option text') and @option-label='${size}']`
-    );
+    return $(`//div[contains(@class, 'swatch-option text') and @option-label='${size}']`);
   }
 
   getProductColorElement(color) {
-    return $(
-      `//div[contains(@class, 'swatch-option color') and @option-label='${color}']`
-    );
+    return $(`//div[contains(@class, 'swatch-option color') and @option-label='${color}']`);
   }
 
   get productQuantity() {

@@ -14,8 +14,8 @@ const testData = {
   existingUser: {
     firstName: "Nejra",
     lastName: "Adilović",
-    email: "[valid_email]",
-    password: "[valid_password]",
+    email: "nejradilovic@atlant.com",
+    password: "Pass123!.",
     streetAddress: "Milana Preloga 12A",
     city: "Sarajevo",
     postalCode: "71000",
@@ -29,6 +29,21 @@ const testData = {
     incorrectPassword: "wrongPassword",
     shortPassword: "1234",
     mismatchedConfirmPassword: "mismatchConfirmPassword"
+  },
+  categories: {
+    women: {
+      categoryName: 'Women',
+      subcategory: 'Bottoms',
+      secondLevelSubcategory: 'Shorts'
+    },
+    men: {
+      categoryName: 'Men',
+      subcategory: 'Tops',
+      secondLevelSubcategory: 'Jackets'
+    },
+    gear: {
+      categoryName: 'Gear',
+    },
   },
   product: {
     searchTerm: "jacket",
