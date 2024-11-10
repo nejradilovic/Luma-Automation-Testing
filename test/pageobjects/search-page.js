@@ -52,6 +52,27 @@ class SearchPage extends Page {
   getSecondLevelSubCategoryMenu(category, subcategory, secondLevel) {
     return $(`//a[@href="https://magento.softwaretestingboard.com/${category.toLowerCase()}/${subcategory.toLowerCase()}-${category.toLowerCase()}/${secondLevel.toLowerCase()}-${category.toLowerCase()}.html"]`);
   }
+
+  get sortByDropdown() {
+    return $("//select[@data-role='sorter']");  
+  }
+
+  get sortDirectionArrow() {
+    return $("a[data-role='direction-switcher']");
+  }
+
+  async selectSortOption(optionValue) {
+    await this.sortByDropdown.selectByAttribute("value", optionValue);
+  }
+
+  async toggleSortDirection() {
+    await this.sortDirectionArrow.click();
+  }
+
+  async isAscending() {
+    const directionClass = await this.sortDirectionArrow.getAttribute("class");
+    return directionClass.includes("sort-asc");
+  }
 }
 
 module.exports = new SearchPage();

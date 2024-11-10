@@ -52,4 +52,40 @@ describe("Product Search Filter Tests", () => {
     const filtersApplied = await SearchUtility.applyFiltersAndVerify('L', 'Blue');
     expect(filtersApplied).toBe(true);
   });
+
+  it('should sort products by price in ascending order', async () => {
+    const category = testData.categories.men;
+    await SearchUtility.navigateToCategory(category.categoryName, category.subcategory, category.secondLevelSubcategory);
+    
+    await SearchUtility.applySorting("price", true);
+    const isSortedCorrectly = await SearchUtility.verifySorting("price", true);
+    expect(isSortedCorrectly).toBe(true);
+  });
+  
+  it('should sort products by price in descending order', async () => {
+    const category = testData.categories.men;
+    await SearchUtility.navigateToCategory(category.categoryName, category.subcategory, category.secondLevelSubcategory);
+  
+    await SearchUtility.applySorting("price", false); 
+    const isSortedCorrectly = await SearchUtility.verifySorting("price", false);
+    expect(isSortedCorrectly).toBe(true);
+  });
+
+  it('should sort products by product name in ascending order', async () => {
+    const category = testData.categories.women;
+    await SearchUtility.navigateToCategory(category.categoryName, category.subcategory, category.secondLevelSubcategory);
+
+    await SearchUtility.applySorting("name", true);
+    const isSorted = await SearchUtility.verifySorting("name", true);
+    expect(isSorted).toBe(true);
+  });
+
+  it('should sort products by product name in descending order', async () => {
+    const category = testData.categories.women;
+    await SearchUtility.navigateToCategory(category.categoryName, category.subcategory, category.secondLevelSubcategory);
+
+    await SearchUtility.applySorting("name", false);
+    const isSorted = await SearchUtility.verifySorting("name", false);
+    expect(isSorted).toBe(true);
+  });
 });

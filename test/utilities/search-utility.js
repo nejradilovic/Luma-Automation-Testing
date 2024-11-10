@@ -80,6 +80,37 @@ class SearchUtility {
 
     return isSizeCorrect && isColorCorrect;
   }
+  
+  async applySorting(option, ascending = true) {
+    await SearchPage.selectSortOption(option);
+    const isCurrentlyAscending = await SearchPage.isAscending();
+    
+    if (ascending !== isCurrentlyAscending) {
+      await SearchPage.toggleSortDirection();
+    }
+  }
+
+  async verifySorting(orderBy, ascending = true) {
+    const products = await $$("//div[@class='product-item']");
+    let values = [];
+
+    for (let product of products) {
+        let value;
+        if (orderBy === "price") {
+            value = await product.$(".price").getText();
+            values.push(parseFloat(value.replace(/[^\d.]/g, "")));
+        } else if (orderBy === "name") {
+            value = await product.$(".product-name").getText();
+            values.push(value.toLowerCase());
+        }
+    }
+
+    const sortedValues = [...values].sort((a, b) => (orderBy === "price" ? a - b : a.localeCompare(b)));
+    if (!ascending) sortedValues.reverse();
+
+    return JSON.stringify(values) === JSON.stringify(sortedValues);
+}
+
 }
 
 module.exports = new SearchUtility();
