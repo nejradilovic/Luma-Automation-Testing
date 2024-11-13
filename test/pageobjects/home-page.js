@@ -12,6 +12,10 @@ class HomePage extends Page {
     );
   }
 
+  get createAccountLink() {
+    return $("/html/body/div[2]/header/div[1]/div/ul/li[3]/a");
+  }
+  
   get welcomeMessage() {
     return $(".logged-in");
   }
@@ -38,6 +42,10 @@ class HomePage extends Page {
 
   async navigateToLoginPage() {
     await this.signInButton.click();
+  }
+
+  async navigateToCreateAccountPage() {
+    await this.createAccountLink.click();
   }
 
   async signOut() {
