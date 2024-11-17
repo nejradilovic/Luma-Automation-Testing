@@ -1,5 +1,5 @@
-const {HomePage, LoginPage, ProductPage, ShippingPage, PaymentsPage, SuccessPage} = require("../pageobjects/page-objects");
-const {HomeUtility, LoginUtility, ProductUtility} = require("../utilities/utilities");
+const {HomePage, ShippingPage, PaymentsPage, SuccessPage} = require("../pageobjects/page-objects");
+const {HomeUtility, LoginUtility, ProductUtility, ShippingUtility} = require("../utilities/utilities");
 const testData = require("../data/test-data");
 
 const {searchTerm, size, color, quantity} = testData.product;
@@ -17,19 +17,10 @@ describe("Smoke Test - Product Purchase Flow", () => {
   });
 
   it("should select product options and add product to cart", async () => {
-    await ProductUtility.selectAllProductInformation(size, color, quantity);
-    const productAdded = await ProductPage.isProductAddedToCart();
-    expect(productAdded).toBe(true);
-    await ProductPage.cartIcon.click();
-    await ProductPage.proceedToCheckoutButton.click();
+    await ProductUtility.addProductToCartAndProceedToCheckout(size, color, quantity);
   });
 
   it("should input shipping details and complete the purchase", async () => {
-    await ShippingPage.fillShippingForm(streetAddress, city, postalCode, phoneNumber, country);
-    await PaymentsPage.buttonPlaceOrder.waitForClickable();
-    await PaymentsPage.buttonPlaceOrder.click();
-    await SuccessPage.continueShoppingButton.waitForClickable();
-    const confirmationMessage = await SuccessPage.spanThankYouMessage.getText();
-    expect(confirmationMessage).toContain("Thank you for your purchase!");
+    await ShippingUtility.completePurchase(streetAddress, city, postalCode, phoneNumber, country);
   });
 });
