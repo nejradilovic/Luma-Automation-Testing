@@ -1,4 +1,5 @@
 const SearchPage = require("../pageobjects/search-page");
+const CommonUtility = require("../utilities/common-utility");
 
 class SearchUtility {
   async navigateToCategory(category, subcategory = null, secondLevelSubcategory = null) {
@@ -21,8 +22,6 @@ class SearchUtility {
   }
 
   async verifyCategoryPage(category, subcategory = null, secondLevelSubcategory = null) {
-    const currentUrl = await browser.getUrl();
-
     let expectedUrl = `https://magento.softwaretestingboard.com/${category.toLowerCase()}`;
 
     if (subcategory) {
@@ -32,7 +31,7 @@ class SearchUtility {
       expectedUrl += `/${secondLevelSubcategory.toLowerCase()}-${category.toLowerCase()}`;
     }
 
-    expect(currentUrl).toContain(expectedUrl);
+    await CommonUtility.checkUrlContains(expectedUrl);
   }
 
   async applySizeFilter(size) {

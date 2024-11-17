@@ -2,6 +2,7 @@ const { expect } = require("@wdio/globals");
 const HomePage = require("../pageobjects/home-page");
 const HomeUtility = require("../utilities/home-utility");
 const LoginUtility = require("../utilities/login-utility");
+const CommonUtility = require("../utilities/common-utility");
 const testData = require("../data/test-data");
 
 describe("Home Page Tests", () => {
@@ -11,16 +12,12 @@ describe("Home Page Tests", () => {
 
   it("should navigate to Sign In page from Home Page", async () => {
     await HomePage.navigateToLoginPage();
-
-    const currentUrl = await browser.getUrl();
-    expect(currentUrl).toContain("customer/account/login");
+    await CommonUtility.checkUrlContains("customer/account/login");
   });
 
   it("should navigate to Create Account page from Home Page", async () => {
     await HomePage.navigateToCreateAccountPage();
-
-    const currentUrl = await browser.getUrl();
-    expect(currentUrl).toContain("customer/account/create");
+    await CommonUtility.checkUrlContains("customer/account/create");
   });
 
   it("should successfully search and open product detail page", async () => {
