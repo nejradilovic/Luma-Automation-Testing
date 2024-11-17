@@ -1,6 +1,4 @@
 const RegistrationPage = require("../pageobjects/registration-page");
-const HomePage = require("../pageobjects/home-page");
-const testData = require("../data/test-data");
 
 class RegistrationUtility {
   async registerUser(firstName, lastName, email, password, confirmPassword) {

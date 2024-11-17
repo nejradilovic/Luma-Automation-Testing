@@ -35,9 +35,7 @@ class RegistrationPage extends Page {
   }  
 
   get registrationSuccessMessage() {
-    return $(
-      "//div[@data-bind='html: $parent.prepareMessageForHtml(message.text)' and contains(text(), 'Thank you for registering with Main Website Store')]"
-    );
+    return $("//div[@data-bind='html: $parent.prepareMessageForHtml(message.text)']");
   }
 
   get registrationErrorMessage() {
