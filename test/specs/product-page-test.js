@@ -4,6 +4,7 @@ const HomePage = require("../pageobjects/home-page");
 const ProductUtility = require("../utilities/product-utility");
 const HomeUtility = require("../utilities/home-utility");
 const testData = require("../data/test-data");
+const CommonUtility = require("../utilities/common-utility");
 
 describe("Product Page Tests", () => {
   beforeEach(async () => {
@@ -21,8 +22,6 @@ describe("Product Page Tests", () => {
 
     await ProductPage.cartIcon.click();
     await ProductPage.proceedToCheckoutButton.click();
-
-    const title = await browser.getTitle();
-    expect(title).toEqual("Checkout");
+    await CommonUtility.checkUrlContains("/checkout");
   });
 });
