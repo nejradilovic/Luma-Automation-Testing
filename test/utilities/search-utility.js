@@ -1,28 +1,30 @@
 const SearchPage = require("../pageobjects/search-page");
+const CommonUtility = require("../utilities/common-utility");
 
 class SearchUtility {
   async navigateToCategory(category, subcategory = null, secondLevelSubcategory = null) {
-    await SearchPage.getCategoryMenu(category).moveTo();
-
+    const mainCategory = await SearchPage.getCategoryMenu(category);
+    await mainCategory.waitForExist();
+    await mainCategory.moveTo();
+  
     if (subcategory) {
-      await SearchPage.getFirstLevelSubCategoryMenu(category, subcategory).moveTo();
+      const firstLevelSubCategory = await SearchPage.getFirstLevelSubCategoryMenu(category, subcategory);
+      await firstLevelSubCategory.waitForExist();
+      await firstLevelSubCategory.moveTo();
+  
       if (secondLevelSubcategory) {
-        await SearchPage.getSecondLevelSubCategoryMenu(category, subcategory, secondLevelSubcategory).moveTo();
-        await SearchPage.getSecondLevelSubCategoryMenu(category, subcategory, secondLevelSubcategory).click();
-      } 
-      else {
-        await SearchPage.getFirstLevelSubCategoryMenu(category, subcategory).click();
+        const secondLevelSubCategory = await SearchPage.getSecondLevelSubCategoryMenu(category, subcategory, secondLevelSubcategory);
+        await secondLevelSubCategory.waitForExist();
+        await secondLevelSubCategory.click();
+        return;
       }
-    } 
-    else {
-      const mainCategoryElement = await SearchPage.getCategoryMenu(category);
-      await mainCategoryElement.click();
+      await firstLevelSubCategory.click();
+      return;
     }
+    await mainCategory.click();
   }
-
+  
   async verifyCategoryPage(category, subcategory = null, secondLevelSubcategory = null) {
-    const currentUrl = await browser.getUrl();
-
     let expectedUrl = `https://magento.softwaretestingboard.com/${category.toLowerCase()}`;
 
     if (subcategory) {
@@ -32,7 +34,7 @@ class SearchUtility {
       expectedUrl += `/${secondLevelSubcategory.toLowerCase()}-${category.toLowerCase()}`;
     }
 
-    expect(currentUrl).toContain(expectedUrl);
+    await CommonUtility.checkUrlContains(expectedUrl);
   }
 
   async applySizeFilter(size) {

@@ -1,4 +1,4 @@
-const { $, browser } = require("@wdio/globals");
+const { $ } = require("@wdio/globals");
 const Page = require("./page");
 
 class ProductPage extends Page {
@@ -52,10 +52,17 @@ class ProductPage extends Page {
     await this.addToCartButton.click();
   }
 
+  async getProductTitle() {
+    const titleElement = await this.productTitle;
+    await titleElement.waitForDisplayed(); 
+    return await titleElement.getText(); 
+}
+
   async isProductAddedToCart() {
     await this.cartSuccessMessage.waitForDisplayed();
     const messageText = await this.cartSuccessMessage.getText();
-    return messageText.includes("You added");
+    const productTitle = await this.getProductTitle(); 
+    return messageText.includes(`You added ${productTitle} to your shopping cart.`);
   }
 }
 

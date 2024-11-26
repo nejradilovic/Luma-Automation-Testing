@@ -1,4 +1,3 @@
-const { expect } = require("@wdio/globals");
 const LoginUtility = require("../utilities/login-utility");
 const testData = require("../data/test-data");
 

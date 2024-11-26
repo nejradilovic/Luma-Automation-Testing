@@ -1,34 +1,36 @@
+const commonUserDetails = {
+  firstName: "Nejra",
+  lastName: "Adilović",
+  streetAddress: "Milana Preloga 12A",
+  city: "Sarajevo",
+  postalCode: "71000",
+  phoneNumber: "061123345",
+  country: "Bosnia & Herzegovina"
+};
+
 const testData = {
   newUser: {
-    firstName: "Nejra",
-    lastName: "Adilović",
+    ...commonUserDetails,
     email: `testuser${Date.now()}@example.com`,
     password: "NewPass123!",
-    confirmPassword: "NewPass123!",
-    streetAddress: "Milana Preloga 12A",
-    city: "Sarajevo",
-    postalCode: "71000",
-    phoneNumber: "061123345",
-    country: "Bosnia & Herzegovina",
+    confirmPassword: "NewPass123!"
   },
   existingUser: {
-    firstName: "Nejra",
-    lastName: "Adilović",
+    ...commonUserDetails,
     email: "[valid_email]",
-    password: "[valid_password]",
-    streetAddress: "Milana Preloga 12A",
-    city: "Sarajevo",
-    postalCode: "71000",
-    phoneNumber: "061123345",
-    country: "Bosnia & Herzegovina",
+    password: "[valid_password]"
   },
   negativeTestCases: {
-    emptyField: "",
-    invalidEmailFormat: "invalid-email-format",
-    unregisteredEmail: "unregistered@testing.com",
-    incorrectPassword: "wrongPassword",
-    shortPassword: "1234",
-    mismatchedConfirmPassword: "mismatchConfirmPassword"
+    email: {
+      invalidFormat: "invalid-email-format",
+      unregisteredEmail: "unregistered@testing.com"
+    },
+    password: {
+      incorrectPassword: "wrongPassword",
+      shortPassword: "1234",
+      mismatchedConfirmPassword: "mismatchConfirmPassword"
+    },
+    emptyField: ""
   },
   categories: {
     women: {
@@ -49,7 +51,7 @@ const testData = {
     searchTerm: "jacket",
     size: "S",
     color: "Purple",
-    quantity: 1,
+    quantity: 1
   }
 };
 

@@ -1,5 +1,6 @@
 const HomePage = require("../pageobjects/home-page");
 const ProductPage = require("../pageobjects/product-page");
+const CommonUtility = require("../utilities/common-utility");
 
 class HomeUtility {
   async searchAndOpenProduct(searchTerm, productIndex = 0) {
@@ -8,9 +9,7 @@ class HomeUtility {
 
     await ProductPage.productTitle.waitForDisplayed();
     const productTitle = await ProductPage.productTitle.getText();
-
-    const currentUrl = await browser.getUrl();
-    expect(currentUrl).toContain(productTitle.toLowerCase().replace(/\s+/g, '-'));
+    await CommonUtility.checkUrlContains(productTitle.toLowerCase().replace(/\s+/g, '-'));
   }
 }
 
