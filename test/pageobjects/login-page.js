@@ -1,5 +1,7 @@
-const { $ } = require("@wdio/globals");
 const Page = require("./page");
+const BaseElement = require("../utilities/elements/base-element");
+const Button = require("../utilities/elements/button");
+const InputField = require("../utilities/elements/input-field");
 
 class LoginPage extends Page {
   open() {
@@ -7,27 +9,27 @@ class LoginPage extends Page {
   }
 
   get inputEmail() {
-    return $("//input[@id='email']");
+    return new InputField("//input[@id='email']");
   }
 
   get inputPassword() {
-    return $("//input[@id='pass']");
+    return new InputField("//input[@id='pass']");
   }
 
   get signInButton() {
-    return $("//button[@id='send2']");
+    return new Button("//button[@id='send2']");
   }
 
   get signUpErrorMessage() {
-    return $("//div[contains(@class, 'page messages')]");
+    return new BaseElement("//div[contains(@class, 'page messages')]");
   }
 
   get emailErrorMessage() {
-    return $("//div[@id='email-error']");
+    return new BaseElement("//div[@id='email-error']");
   }
 
   get passwordErrorMessage() {
-    return $("//div[@id='pass-error']");
+    return new BaseElement("//div[@id='pass-error']");
   }
 
   async isEmailErrorDisplayed() {

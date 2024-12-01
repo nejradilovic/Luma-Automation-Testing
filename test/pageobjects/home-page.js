@@ -1,5 +1,7 @@
-const { $ } = require("@wdio/globals");
 const Page = require("./page");
+const Button = require("../utilities/elements/button");
+const InputField = require("../utilities/elements/input-field");
+const BaseElement = require("../utilities/elements/base-element");
 
 class HomePage extends Page {
   open() {
@@ -7,37 +9,35 @@ class HomePage extends Page {
   }
 
   get signInButton() {
-    return $(
-      '//li[@class="authorization-link"]/a[contains(text(), "Sign In")]'
-    );
+    return new Button('//li[@class="authorization-link"]/a[contains(text(), "Sign In")]');
   }
 
   get createAccountLink() {
-    return $("/html/body/div[2]/header/div[1]/div/ul/li[3]/a");
+    return new Button("/html/body/div[2]/header/div[1]/div/ul/li[3]/a");
   }
-  
+
   get welcomeMessage() {
-    return $(".logged-in");
+    return new BaseElement(".logged-in");
   }
 
   get welcomeDropdownButton() {
-    return $('button[data-action="customer-menu-toggle"]');
+    return new Button('button[data-action="customer-menu-toggle"]');
   }
 
   get signOutButton() {
-    return $('a[href*="customer/account/logout"]');
+    return new Button('a[href*="customer/account/logout"]');
   }
 
   get searchBar() {
-    return $('//input[@name="q"]');
+    return new InputField('//input[@name="q"]');
   }
 
   get searchButton() {
-    return $('//button[@type="submit" and @aria-label="Search"]');
+    return new Button('//button[@type="submit" and @aria-label="Search"]');
   }
 
   get searchResults() {
-    return $$(".product-item-link");
+    return new BaseElement(".product-item-link");
   }
 
   async navigateToLoginPage() {
@@ -62,8 +62,10 @@ class HomePage extends Page {
   }
 
   async openProductDetail(index) {
-    const results = await this.searchResults;
-    if (results.length > index) await results[index].click();
+    const results = await this.searchResults.getElements();
+    if (results.length > index) {
+      await results[index].click();
+    }
   }
 }
 

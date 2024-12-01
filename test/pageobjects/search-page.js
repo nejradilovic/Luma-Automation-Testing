@@ -1,22 +1,24 @@
-const { $ } = require("@wdio/globals");
 const Page = require("./page");
+const SelectField = require("../utilities/elements/select-field");
+const Button = require("../utilities/elements/button");
+const BaseElement = require("../utilities/elements/base-element");
 
 class SearchPage extends Page {
 
   get sizeFilter() {
-    return $("//div[@data-role='title' and text()='Size']");
+    return new BaseElement("//div[@data-role='title' and text()='Size']");
   }
 
   get colorFilter() {
-    return $("//div[@data-role='title' and text()='Color']");
+    return new BaseElement("//div[@data-role='title' and text()='Color']");
   }
 
   getSizeFilterOption(size) {
-    return $(`.swatch-attribute-options a[aria-label='${size}'] .swatch-option.text`);
+    return new BaseElement(`.swatch-attribute-options a[aria-label='${size}'] .swatch-option.text`);
   }  
 
   getColorFilterOption(color) {
-    return $(`.swatch-attribute-options a[aria-label='${color}'] .swatch-option.color`);
+    return new BaseElement(`.swatch-attribute-options a[aria-label='${color}'] .swatch-option.color`);
   }
 
   async openSizeFilter() {
@@ -29,40 +31,38 @@ class SearchPage extends Page {
 
   async applySizeFilter(size) {
     await this.openSizeFilter();  
-    const sizeOption = this.getSizeFilterOption(size); 
-    await sizeOption.waitForClickable(); 
+    const sizeOption = this.getSizeFilterOption(size);  
     await sizeOption.click();  
   }
 
   async applyColorFilter(color) {
     await this.openColorFilter();  
     const colorOption = this.getColorFilterOption(color); 
-    await colorOption.waitForClickable(); 
     await colorOption.click();  
   }
   
   getCategoryMenu(category) {
-    return $(`//a[@href="https://magento.softwaretestingboard.com/${category.toLowerCase()}.html"]`);
+    return new Button(`//a[@href="https://magento.softwaretestingboard.com/${category.toLowerCase()}.html"]`);
   }
 
   getFirstLevelSubCategoryMenu(category, subcategory) {
-    return $(`//a[@href="https://magento.softwaretestingboard.com/${category.toLowerCase()}/${subcategory.toLowerCase()}-${category.toLowerCase()}.html"]`);
+    return new Button(`//a[@href="https://magento.softwaretestingboard.com/${category.toLowerCase()}/${subcategory.toLowerCase()}-${category.toLowerCase()}.html"]`);
   }
 
   getSecondLevelSubCategoryMenu(category, subcategory, secondLevel) {
-    return $(`//a[@href="https://magento.softwaretestingboard.com/${category.toLowerCase()}/${subcategory.toLowerCase()}-${category.toLowerCase()}/${secondLevel.toLowerCase()}-${category.toLowerCase()}.html"]`);
+    return new Button(`//a[@href="https://magento.softwaretestingboard.com/${category.toLowerCase()}/${subcategory.toLowerCase()}-${category.toLowerCase()}/${secondLevel.toLowerCase()}-${category.toLowerCase()}.html"]`);
   }
 
   get sortByDropdown() {
-    return $("//select[@data-role='sorter']");  
+    return new SelectField("//select[@data-role='sorter']");  
   }
 
   get sortDirectionArrow() {
-    return $("a[data-role='direction-switcher']");
+    return new Button("a[data-role='direction-switcher']");
   }
 
   async selectSortOption(optionValue) {
-    await this.sortByDropdown.selectByAttribute("value", optionValue);
+    await this.sortByDropdown.setValue(optionValue);
   }
 
   async toggleSortDirection() {

@@ -1,5 +1,5 @@
-const { $ } = require("@wdio/globals");
 const Page = require("./page");
+const Button = require("../utilities/elements/button");
 
 class PaymentsPage extends Page {
   open() {
@@ -7,7 +7,11 @@ class PaymentsPage extends Page {
   }
 
   get buttonPlaceOrder() {
-    return $(`button[title='Place Order']`);
+    return new Button(`button[title='Place Order']`);
+  }
+
+  async placeOrder() {
+    await this.buttonPlaceOrder.click();
   }
 }
 module.exports = new PaymentsPage();

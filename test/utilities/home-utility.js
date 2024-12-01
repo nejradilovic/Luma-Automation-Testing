@@ -7,7 +7,6 @@ class HomeUtility {
     await HomePage.searchForProduct(searchTerm);
     await HomePage.openProductDetail(productIndex);
 
-    await ProductPage.productTitle.waitForDisplayed();
     const productTitle = await ProductPage.productTitle.getText();
     await CommonUtility.checkUrlContains(productTitle.toLowerCase().replace(/\s+/g, '-'));
   }
