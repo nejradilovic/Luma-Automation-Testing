@@ -1,37 +1,40 @@
-const { $ } = require("@wdio/globals");
 const Page = require("./page");
+const Button = require("../utilities/elements/button");
+const InputField = require("../utilities/elements/input-field");
+const BaseElement = require("../utilities/elements/base-element");
+const selectors = require("../utilities/selectors");
 
 class ProductPage extends Page {
   get productTitle() {
-    return $("//span[@class='base' and @data-ui-id='page-title-wrapper']");
+    return new BaseElement(selectors.productPage.productTitle);
   }
 
   getProductSizeElement(size) {
-    return $(`//div[contains(@class, 'swatch-option text') and @option-label='${size}']`);
+    return new BaseElement(selectors.productPage.productSize(size));
   }
 
   getProductColorElement(color) {
-    return $(`//div[contains(@class, 'swatch-option color') and @option-label='${color}']`);
+    return new BaseElement(selectors.productPage.productColor(color));
   }
 
   get productQuantity() {
-    return $('//input[@id="qty"]');
+    return new InputField(selectors.productPage.productQuantity);
   }
 
   get addToCartButton() {
-    return $('//button[@id="product-addtocart-button"]');
+    return new Button(selectors.productPage.addToCartButton);
   }
 
   get cartSuccessMessage() {
-    return $(".message-success");
+    return new BaseElement(selectors.productPage.cartSuccessMessage);
   }
 
   get cartIcon() {
-    return $(".action.showcart");
+    return new BaseElement(selectors.productPage.cartIcon);
   }
 
   get proceedToCheckoutButton() {
-    return $("#top-cart-btn-checkout");
+    return new Button(selectors.productPage.proceedToCheckoutButton);
   }
 
   async selectProductSize(size) {
@@ -52,16 +55,18 @@ class ProductPage extends Page {
     await this.addToCartButton.click();
   }
 
-  async getProductTitle() {
-    const titleElement = await this.productTitle;
-    await titleElement.waitForDisplayed(); 
-    return await titleElement.getText(); 
-}
+  async goToCart() {
+    await this.cartIcon.click();
+  }
+
+  async proceedToCheckout() {
+    await this.proceedToCheckoutButton.click();
+  }
 
   async isProductAddedToCart() {
     await this.cartSuccessMessage.waitForDisplayed();
     const messageText = await this.cartSuccessMessage.getText();
-    const productTitle = await this.getProductTitle(); 
+    const productTitle = await this.productTitle.getText();
     return messageText.includes(`You added ${productTitle} to your shopping cart.`);
   }
 }

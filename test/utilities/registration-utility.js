@@ -12,7 +12,6 @@ class RegistrationUtility {
   }
 
   async verifySuccessfulRegistration() {
-    await RegistrationPage.registrationSuccessMessage.waitForDisplayed();
     const successMessage = await RegistrationPage.registrationSuccessMessage.getText();
     expect(successMessage).toContain("Thank you for registering with Main Website Store.");
   }
