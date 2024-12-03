@@ -2,38 +2,39 @@ const Page = require("./page");
 const Button = require("../utilities/elements/button");
 const InputField = require("../utilities/elements/input-field");
 const BaseElement = require("../utilities/elements/base-element");
+const selectors = require("../utilities/selectors");
 
 class ProductPage extends Page {
   get productTitle() {
-    return new BaseElement("//span[@class='base' and @data-ui-id='page-title-wrapper']");
+    return new BaseElement(selectors.productPage.productTitle);
   }
 
   getProductSizeElement(size) {
-    return new BaseElement(`//div[contains(@class, 'swatch-option text') and @option-label='${size}']`);
+    return new BaseElement(selectors.productPage.productSize(size));
   }
 
   getProductColorElement(color) {
-    return new BaseElement(`//div[contains(@class, 'swatch-option color') and @option-label='${color}']`);
+    return new BaseElement(selectors.productPage.productColor(color));
   }
 
   get productQuantity() {
-    return new InputField('//input[@id="qty"]');
+    return new InputField(selectors.productPage.productQuantity);
   }
 
   get addToCartButton() {
-    return new Button('//button[@id="product-addtocart-button"]');
+    return new Button(selectors.productPage.addToCartButton);
   }
 
   get cartSuccessMessage() {
-    return new BaseElement(".message-success");
+    return new BaseElement(selectors.productPage.cartSuccessMessage);
   }
 
   get cartIcon() {
-    return new BaseElement(".action.showcart");
+    return new BaseElement(selectors.productPage.cartIcon);
   }
 
   get proceedToCheckoutButton() {
-    return new Button("#top-cart-btn-checkout");
+    return new Button(selectors.productPage.proceedToCheckoutButton);
   }
 
   async selectProductSize(size) {

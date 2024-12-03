@@ -2,23 +2,24 @@ const Page = require("./page");
 const SelectField = require("../utilities/elements/select-field");
 const Button = require("../utilities/elements/button");
 const BaseElement = require("../utilities/elements/base-element");
+const selectors = require("../utilities/selectors");
 
 class SearchPage extends Page {
 
   get sizeFilter() {
-    return new BaseElement("//div[@data-role='title' and text()='Size']");
+    return new BaseElement(selectors.searchPage.sizeFilter);
   }
 
   get colorFilter() {
-    return new BaseElement("//div[@data-role='title' and text()='Color']");
+    return new BaseElement(selectors.searchPage.colorFilter);
   }
 
   getSizeFilterOption(size) {
-    return new BaseElement(`.swatch-attribute-options a[aria-label='${size}'] .swatch-option.text`);
-  }  
+    return new BaseElement(selectors.searchPage.sizeFilterOption(size));
+  }
 
   getColorFilterOption(color) {
-    return new BaseElement(`.swatch-attribute-options a[aria-label='${color}'] .swatch-option.color`);
+    return new BaseElement(selectors.searchPage.colorFilterOption(color));
   }
 
   async openSizeFilter() {
@@ -40,25 +41,25 @@ class SearchPage extends Page {
     const colorOption = this.getColorFilterOption(color); 
     await colorOption.click();  
   }
-  
+
   getCategoryMenu(category) {
-    return new Button(`//a[@href="https://magento.softwaretestingboard.com/${category.toLowerCase()}.html"]`);
+    return new Button(selectors.searchPage.categoryMenu(category));
   }
 
   getFirstLevelSubCategoryMenu(category, subcategory) {
-    return new Button(`//a[@href="https://magento.softwaretestingboard.com/${category.toLowerCase()}/${subcategory.toLowerCase()}-${category.toLowerCase()}.html"]`);
+    return new Button(selectors.searchPage.firstLevelSubCategoryMenu(category, subcategory));
   }
 
   getSecondLevelSubCategoryMenu(category, subcategory, secondLevel) {
-    return new Button(`//a[@href="https://magento.softwaretestingboard.com/${category.toLowerCase()}/${subcategory.toLowerCase()}-${category.toLowerCase()}/${secondLevel.toLowerCase()}-${category.toLowerCase()}.html"]`);
+    return new Button(selectors.searchPage.secondLevelSubCategoryMenu(category, subcategory, secondLevel));
   }
 
   get sortByDropdown() {
-    return new SelectField("//select[@data-role='sorter']");  
+    return new SelectField(selectors.searchPage.sortByDropdown);
   }
 
   get sortDirectionArrow() {
-    return new Button("a[data-role='direction-switcher']");
+    return new Button(selectors.searchPage.sortDirectionArrow);
   }
 
   async selectSortOption(optionValue) {
