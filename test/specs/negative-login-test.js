@@ -6,12 +6,12 @@ const {password: {incorrectPassword}, email: {invalidFormat, unregisteredEmail},
 
 describe("Negative Login Test Cases", () => {
   it("should show error messages for empty email and password fields", async () => {
-    await LoginUtility.loginUser(emptyField, emptyField);
+    await LoginUtility.loginUser();
     await LoginUtility.verifyRequiredFieldErrors();
   });
 
   it("should show error message for empty password", async () => {
-    await LoginUtility.loginUser(email, emptyField);
+    await LoginUtility.loginUser(email);
     await LoginUtility.verifyRequiredFieldErrors();
   });
 
