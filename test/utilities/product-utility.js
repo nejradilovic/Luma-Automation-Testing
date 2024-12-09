@@ -1,4 +1,5 @@
 const ProductPage = require('../pageobjects/product-page');
+const CommonUtility = require("../utilities/common-utility");
 
 class ProductUtility {
   async selectAllProductInformation(size, color, quantity) {
@@ -11,10 +12,11 @@ class ProductUtility {
     await this.selectAllProductInformation(size, color, quantity);
     const productAdded = await ProductPage.isProductAddedToCart();
     expect(productAdded).toBe(true); 
-    await ProductPage.cartIcon.click();
-    await ProductPage.proceedToCheckoutButton.click();
-  }
-  
+
+    await ProductPage.goToCart();
+    await ProductPage.proceedToCheckout();
+    await CommonUtility.checkUrlContains("/checkout");
+  } 
 }
 
 module.exports = new ProductUtility();
