@@ -11,22 +11,22 @@ describe("Negative Login Test Cases", () => {
   });
 
   it("should show error message for empty password", async () => {
-    await LoginUtility.loginUser({email: email});
+    await LoginUtility.loginUser({email});
     await LoginUtility.verifyRequiredFieldErrors();
   });
 
   it("should show error message for empty email", async () => {
-    await LoginUtility.loginUser({password: password});
+    await LoginUtility.loginUser({password});
     await LoginUtility.verifyRequiredFieldErrors();
   });
 
   it("should show error message for invalid email format", async () => {
-    await LoginUtility.loginUser({email: invalidFormat, password: password});
+    await LoginUtility.loginUser({email: invalidFormat, password});
     await LoginUtility.verifyInvalidEmailError();
   });
 
   it("should show error message for incorrect password", async () => {
-    await LoginUtility.loginUser({email: email, password: incorrectPassword});
+    await LoginUtility.loginUser({email, password: incorrectPassword});
     await LoginUtility.verifySignInError();
   });
 
