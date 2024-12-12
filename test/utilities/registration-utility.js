@@ -1,7 +1,7 @@
 const RegistrationPage = require("../pageobjects/registration-page");
 
 class RegistrationUtility {
-  async registerUser(firstName, lastName, email, password, confirmPassword) {
+  async registerUser({ firstName = "", lastName = "", email = "", password = "", confirmPassword = "" } = {}) {
     await RegistrationPage.open();
     await RegistrationPage.inputFirstName.setValue(firstName);
     await RegistrationPage.inputLastName.setValue(lastName);
