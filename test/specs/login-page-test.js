@@ -3,7 +3,8 @@ const testData = require("../data/test-data");
 
 describe("Login Page Tests", () => {
   it("should login successfully with valid credentials", async () => {
-    await LoginUtility.loginUser(testData.existingUser.email, testData.existingUser.password);
+    const {email, password} = testData.existingUser;
+    await LoginUtility.loginUser({email, password});
     await LoginUtility.verifySuccessfulLogin();
   });
 });

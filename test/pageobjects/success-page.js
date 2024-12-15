@@ -1,5 +1,7 @@
-const { $ } = require("@wdio/globals");
 const Page = require("./page");
+const BaseElement = require("../utilities/elements/base-element");
+const Button = require("../utilities/elements/button");
+const selectors = require("../utilities/selectors");
 
 class SuccessPage extends Page {
   open() {
@@ -7,10 +9,11 @@ class SuccessPage extends Page {
   }
 
   get spanThankYouMessage() {
-    return $("//span[@class='base' and @data-ui-id='page-title-wrapper']");
+    return new BaseElement(selectors.successPage.spanThankYouMessage);
   }
+
   get continueShoppingButton() {
-    return $("a.action.primary.continue");
+    return new Button(selectors.successPage.continueShoppingButton);
   }
 }
 

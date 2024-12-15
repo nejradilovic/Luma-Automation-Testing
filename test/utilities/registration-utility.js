@@ -1,7 +1,7 @@
 const RegistrationPage = require("../pageobjects/registration-page");
 
 class RegistrationUtility {
-  async registerUser(firstName, lastName, email, password, confirmPassword) {
+  async registerUser({ firstName = "", lastName = "", email = "", password = "", confirmPassword = "" } = {}) {
     await RegistrationPage.open();
     await RegistrationPage.inputFirstName.setValue(firstName);
     await RegistrationPage.inputLastName.setValue(lastName);
@@ -12,7 +12,6 @@ class RegistrationUtility {
   }
 
   async verifySuccessfulRegistration() {
-    await RegistrationPage.registrationSuccessMessage.waitForDisplayed();
     const successMessage = await RegistrationPage.registrationSuccessMessage.getText();
     expect(successMessage).toContain("Thank you for registering with Main Website Store.");
   }

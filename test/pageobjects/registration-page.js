@@ -1,66 +1,69 @@
-const { $ } = require("@wdio/globals");
 const Page = require("./page");
+const InputField = require("../utilities/elements/input-field");
+const Button = require("../utilities/elements/button");
+const BaseElement = require("../utilities/elements/base-element");
+const selectors = require("../utilities/selectors");
 
 class RegistrationPage extends Page {
-  open() {
-    return super.open("customer/account/create/");
-  }
+    open() {
+        return super.open("customer/account/create/");
+    }
 
-  get inputFirstName() {
-    return $("//input[@name='firstname' and @title='First Name']");
-  }
+    get inputFirstName() {
+        return new InputField(selectors.registrationPage.inputFirstName);
+    }
 
-  get inputLastName() {
-    return $("//input[@name='lastname' and @title='Last Name']");
-  }
+    get inputLastName() {
+        return new InputField(selectors.registrationPage.inputLastName);
+    }
 
-  get inputEmail() {
-    return $("//input[@name='email' and @title='Email']");
-  }
+    get inputEmail() {
+        return new InputField(selectors.registrationPage.inputEmail);
+    }
 
-  get inputPassword() {
-    return $("//input[@name='password' and @title='Password']");
-  }
+    get inputPassword() {
+        return new InputField(selectors.registrationPage.inputPassword);
+    }
 
-  get inputConfirmPassword() {
-    return $("//input[@name='password_confirmation' and @title='Confirm Password']");
-  }
+    get inputConfirmPassword() {
+        return new InputField(selectors.registrationPage.inputConfirmPassword);
+    }
 
-  get buttonSubmit() {
-    return $("//button[@class='action submit primary' and @title='Create an Account']/span[contains(text(), 'Create an Account')]");
-  }
-  
-  get pageTitle() {
-    return $("//h1[contains(text(), 'Create New Customer Account')]");
-  }  
+    get buttonSubmit() {
+        return new Button(selectors.registrationPage.buttonSubmit);
+    }
 
-  get registrationSuccessMessage() {
-    return $("//div[@data-bind='html: $parent.prepareMessageForHtml(message.text)']");
-  }
+    get pageTitle() {
+        return new BaseElement(selectors.registrationPage.pageTitle);
+    }
 
-  get registrationErrorMessage() {
-    return $("div.message-error[data-ui-id='message-error']");
-  }
+    get registrationSuccessMessage() {
+        return new BaseElement(selectors.registrationPage.registrationSuccessMessage);
+    }
 
-  get emailErrorMessage() {
-    return $("//div[@id='email_address-error']");
-  }
+    get registrationErrorMessage() {
+        return new BaseElement(selectors.registrationPage.registrationErrorMessage);
+    }
 
-  get passwordErrorMessage() {
-    return $("//div[@id='password-error']");
-  }
+    get emailErrorMessage() {
+        return new BaseElement(selectors.registrationPage.emailErrorMessage);
+    }
 
-  get passwordConfirmationErrorMessage() {
-    return $('//div[@id="password-confirmation-error"]');
-  }
+    get passwordErrorMessage() {
+        return new BaseElement(selectors.registrationPage.passwordErrorMessage);
+    }
 
-  get firstNameErrorMessage() {
-    return $("//div[@id='firstname-error']");
-  }
+    get passwordConfirmationErrorMessage() {
+        return new BaseElement(selectors.registrationPage.passwordConfirmationErrorMessage);
+    }
 
-  get lastNameErrorMessage() {
-    return $("//div[@id='lastname-error']");
-  }
+    get firstNameErrorMessage() {
+        return new BaseElement(selectors.registrationPage.firstNameErrorMessage);
+    }
+
+    get lastNameErrorMessage() {
+        return new BaseElement(selectors.registrationPage.lastNameErrorMessage);
+    }
 }
 
 module.exports = new RegistrationPage();
