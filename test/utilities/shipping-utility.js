@@ -5,9 +5,7 @@ const SuccessPage = require("../pageobjects/success-page");
 class ShippingUtility {
   async completePurchase(streetAddress, city, postalCode, phoneNumber, country) {
     await ShippingPage.fillShippingForm(streetAddress, city, postalCode, phoneNumber, country);
-    await PaymentsPage.buttonPlaceOrder.waitForClickable();
-    await PaymentsPage.buttonPlaceOrder.click();
-
+    await PaymentsPage.placeOrder();
     await SuccessPage.continueShoppingButton.waitForClickable();
     const confirmationMessage = await SuccessPage.spanThankYouMessage.getText();
     expect(confirmationMessage).toContain("Thank you for your purchase!");

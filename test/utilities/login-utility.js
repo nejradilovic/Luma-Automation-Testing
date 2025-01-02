@@ -3,7 +3,7 @@ const HomePage = require("../pageobjects/home-page");
 const testData = require("../data/test-data");
 
 class LoginUtility {
-  async loginUser(email, password) {
+  async loginUser({ email = "", password = "" } = {}) {
     await LoginPage.open();
     await LoginPage.inputEmail.setValue(email);
     await LoginPage.inputPassword.setValue(password);
@@ -11,7 +11,6 @@ class LoginUtility {
   }
 
   async verifySuccessfulLogin() {
-    await HomePage.welcomeMessage.waitForDisplayed();
     const welcomeMessage = await HomePage.welcomeMessage.getText();
     expect(welcomeMessage).toBe(`Welcome, ${testData.existingUser.firstName} ${testData.existingUser.lastName}!`);
   }
