@@ -1,7 +1,7 @@
 const SearchPage = require("../pageobjects/search-page");
-const CommonUtility = require("../utilities/common-utility");
+const CommonUtility = require("./common-utility");
 
-class SearchUtility {
+class SearchUtility extends CommonUtility {
   async navigateToCategory(category, subcategory = null, secondLevelSubcategory = null) {
     const mainCategory = await SearchPage.getCategoryMenu(category);
     await mainCategory.waitForExist();
@@ -34,7 +34,7 @@ class SearchUtility {
       expectedUrl += `/${secondLevelSubcategory.toLowerCase()}-${category.toLowerCase()}`;
     }
 
-    await CommonUtility.checkUrlContains(expectedUrl);
+    await this.checkUrlContains(expectedUrl);
   }
 
   async applySizeFilter(size) {
@@ -111,8 +111,7 @@ class SearchUtility {
     if (!ascending) sortedValues.reverse();
 
     return JSON.stringify(values) === JSON.stringify(sortedValues);
-}
-
+  }
 }
 
 module.exports = new SearchUtility();
