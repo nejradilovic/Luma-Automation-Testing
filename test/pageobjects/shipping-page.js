@@ -47,7 +47,7 @@ class ShippingPage extends Page {
   }
 
   async fillShippingForm(streetAddress, city, postalCode, phoneNumber, country) {
-    const existingAddressSelected = await this.existingAddressOption.isDisplayed();
+    const existingAddressSelected = this.existingAddressOption.isDisplayed();
 
     if (!existingAddressSelected) {
       await this.inputStreetAddress.setValue(streetAddress);

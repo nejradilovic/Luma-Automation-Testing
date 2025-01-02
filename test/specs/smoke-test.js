@@ -8,7 +8,7 @@ const {email, password, firstName, lastName, streetAddress, city, postalCode, ph
 describe("Smoke Test - Product Purchase Flow", () => {
   it("should log into a valid account", async () => {
     await HomePage.open();
-    await LoginUtility.loginUser(email, password);
+    await LoginUtility.loginUser({email, password});
     await LoginUtility.verifySuccessfulLogin();
   });
 
