@@ -1,7 +1,7 @@
 const ProductPage = require('../pageobjects/product-page');
-const CommonUtility = require("../utilities/common-utility");
+const CommonUtility = require("./common-utility");
 
-class ProductUtility {
+class ProductUtility extends CommonUtility {
   async selectAllProductInformation(size, color, quantity) {
     await ProductPage.selectProductSize(size);
     await ProductPage.selectProductColor(color);
@@ -15,7 +15,7 @@ class ProductUtility {
 
     await ProductPage.goToCart();
     await ProductPage.proceedToCheckout();
-    await CommonUtility.checkUrlContains("/checkout");
+    await this.checkUrlContains("/checkout");
   } 
 }
 
