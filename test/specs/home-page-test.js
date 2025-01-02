@@ -12,12 +12,12 @@ describe("Home Page Tests", () => {
 
   it("should navigate to Sign In page from Home Page", async () => {
     await HomePage.navigateToLoginPage();
-    await CommonUtility.checkUrlContains("customer/account/login");
+    await HomeUtility.checkUrlContains("customer/account/login");
   });
 
   it("should navigate to Create Account page from Home Page", async () => {
     await HomePage.navigateToCreateAccountPage();
-    await CommonUtility.checkUrlContains("customer/account/create");
+    await HomeUtility.checkUrlContains("customer/account/create");
   });
 
   it("should successfully search and open product detail page", async () => {
@@ -25,10 +25,7 @@ describe("Home Page Tests", () => {
   });
 
   it("should successfully sign out and display Sign In button", async () => {
-    await LoginUtility.loginUser(testData.existingUser.email, testData.existingUser.password);
-    
-    await HomePage.signOut();
-    await HomePage.signInButton.waitForDisplayed();
-    expect(await HomePage.signInButton.isDisplayed()).toBe(true);
+    await LoginUtility.loginUser({email: testData.existingUser.email, password: testData.existingUser.password});
+    await HomeUtility.signOut();
   });
 });
