@@ -1,8 +1,6 @@
-const { expect } = require("@wdio/globals");
 const HomePage = require("../pageobjects/home-page");
 const HomeUtility = require("../utilities/home-utility");
 const LoginUtility = require("../utilities/login-utility");
-const CommonUtility = require("../utilities/common-utility");
 const testData = require("../data/test-data");
 
 describe("Home Page Tests", () => {

@@ -1,4 +1,4 @@
-const {HomePage, ShippingPage, PaymentsPage, SuccessPage} = require("../pageobjects/page-objects");
+const HomePage = require("../pageobjects/home-page")
 const {HomeUtility, LoginUtility, ProductUtility, ShippingUtility} = require("../utilities/utilities");
 const testData = require("../data/test-data");
 
