@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 const commonUserDetails = {
   firstName: "Nejra",
   lastName: "Adilović",
@@ -17,8 +19,8 @@ const testData = {
   },
   existingUser: {
     ...commonUserDetails,
-    email: process.env.LOGIN_EMAIL || "[valid_email]",
-    password: process.env.LOGIN_PASSWORD || "[valid_password]"
+    email: process.env.LOGIN_EMAIL,
+    password: process.env.LOGIN_PASSWORD
   },
   negativeTestCases: {
     email: {
