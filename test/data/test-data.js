@@ -17,8 +17,8 @@ const testData = {
   },
   existingUser: {
     ...commonUserDetails,
-    email: "[valid_email]",
-    password: "[valid_password]"
+    email: process.env.LOGIN_EMAIL || "[valid_email]",
+    password: process.env.LOGIN_PASSWORD || "[valid_password]"
   },
   negativeTestCases: {
     email: {
