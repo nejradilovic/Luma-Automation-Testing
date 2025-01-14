@@ -21,8 +21,14 @@ exports.config = {
   // of the config file unless it's absolute.
   //
   before: function () {
-    global.email = process.env.LOGIN_EMAIL;
-    global.password = process.env.LOGIN_PASSWORD;
+    // Proveri da li environment varijable postoje
+    if (!process.env.LOGIN_EMAIL || !process.env.LOGIN_PASSWORD) {
+        throw new Error("LOGIN_EMAIL ili LOGIN_PASSWORD environment varijable nisu definisane!");
+    }
+    // Postavi globalne varijable za login
+    global.loginEmail = process.env.LOGIN_EMAIL;
+    global.loginPassword = process.env.LOGIN_PASSWORD;
+    console.log("Environment varijable su uspešno učitane.");
   },
   specs: ["./test/specs/**/*.js"],
   // Patterns to exclude.
