@@ -18,12 +18,12 @@ pipeline {
         stage('Run Smoke Tests') {
             steps {
                 script {
-                    echo "Prosleđene varijable: ${env.LOGIN_EMAIL}, ${env.LOGIN_PASSWORD}"
+                    echo "Prosleđene varijable: ${process.env.LOGIN_EMAIL}, ${process.env.LOGIN_PASSWORD}"
                 }
                 bat """
-                set LOGIN_EMAIL=${env.LOGIN_EMAIL}
-                set LOGIN_PASSWORD=${env.LOGIN_PASSWORD}
-                npx wdio run wdio.conf.js
+                set LOGIN_EMAIL=${process.env.LOGIN_EMAIL}
+                set LOGIN_PASSWORD=${process.env.LOGIN_PASSWORD}
+                npx wdio run wdio.conf.js --spec .\test\specs\smoke-test.js
                 """
             }
         }
