@@ -3,9 +3,8 @@ const {HomeUtility, LoginUtility, ProductUtility, ShippingUtility} = require("..
 const testData = require("../data/test-data");
 
 const {searchTerm, size, color, quantity} = testData.product;
-const {firstName, lastName, streetAddress, city, postalCode, phoneNumber, country} = testData.existingUser;
-const email = process.env.LOGIN_EMAIL;
-const password =  process.env.LOGIN_PASSWORD;
+const {email, password, firstName, lastName, streetAddress, city, postalCode, phoneNumber, country} = testData.existingUser;
+
 describe("Smoke Test - Product Purchase Flow", () => {
   it("should log into a valid account", async () => {
     await HomePage.open();
