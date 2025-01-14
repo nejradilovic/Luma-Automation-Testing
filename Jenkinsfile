@@ -4,7 +4,7 @@ pipeline {
         LOGIN_EMAIL = credentials('LumaUsername')
         LOGIN_PASSWORD = credentials('LumaPassword')
     }
-    stages {      
+    stages {
         stage('Checkout') {
             steps {
                 checkout scm
@@ -17,11 +17,18 @@ pipeline {
         }
         stage('Run Smoke Tests') {
             steps {
-                bat 'npx wdio run wdio.conf.js --spec ./test/specs/smoke-test.js'
+                script {
+                    withEnv(["LOGIN_EMAIL=${env.LOGIN_EMAIL}", "LOGIN_PASSWORD=${env.LOGIN_PASSWORD}"]) {
+                        bat '''
+                        set LOGIN_EMAIL=${LOGIN_EMAIL}
+                        set LOGIN_PASSWORD=${LOGIN_PASSWORD}
+                        npx wdio run wdio.conf.js --spec ./test/specs/smoke-test.js
+                        '''
+                    }
+                }
             }
         }
     }
-
     post {
         always {
             echo "Pipeline finished."
