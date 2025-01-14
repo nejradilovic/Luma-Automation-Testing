@@ -1,7 +1,8 @@
 pipeline {
     agent any
     environment {
-        LOGIN_CREDENTIALS = credentials('LumaLogin') // Ovo koristi samo jedan credentials entry
+        LOGIN_EMAIL = credentials('LumaUsername')
+        LOGIN_PASSWORD = credentials('LumaPassword')
     }
     stages {
         stage('Checkout') {
@@ -17,15 +18,10 @@ pipeline {
         stage('Run Smoke Tests') {
             steps {
                 script {
-                    // Provera vrednosti environment varijabli (za debugging, obično se ukloni kasnije)
-                    echo "Using credentials: ${env.LOGIN_CREDENTIALS_USR} / ${env.LOGIN_CREDENTIALS_PSW}"
+                    echo 'Email: ${env.LOGIN_EMAIL}'
+                    echo 'Password: ${env.LOGIN_PASSWORD}'
                 }
-                // Postavljanje varijabli za CMD
-                bat 'set LOGIN_EMAIL=%LOGIN_CREDENTIALS_USR%'
-                bat 'set LOGIN_PASSWORD=%LOGIN_CREDENTIALS_PSW%'
-                
-                // Pokretanje testova
-                bat 'npx wdio run wdio.conf.js --spec ./test/specs/smoke-test.js'
+                bat 'npx wdio run wdio.conf.js --spec ./test/specs/smoke-test.js --email=${env.LOGIN_EMAIL} --password=${env.LOGIN_PASSWORD}'
             }
         } 
     }
