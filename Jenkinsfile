@@ -12,12 +12,12 @@ pipeline {
         }
         stage('Install Dependencies') {
             steps {
-                sh 'npm install'
+                bat 'npm install'
             }
         }
         stage('Run Smoke Tests') {
             steps {
-                sh 'npx wdio run wdio.conf.js --spec ./test/specs/smoke-test.js'
+                bat 'npx wdio run wdio.conf.js --spec ./test/specs/smoke-test.js'
             }
         }
     }
