@@ -18,7 +18,7 @@ pipeline {
         stage('Run Smoke Tests') {
             steps {
                 script {
-                    withEnv(["LOGIN_EMAIL=${env.LOGIN_EMAIL}", "LOGIN_PASSWORD=${env.LOGIN_PASSWORD}"]) {
+                    withEnv(["LOGIN_EMAIL=${process.env.LOGIN_EMAIL}", "LOGIN_PASSWORD=${process.env.LOGIN_PASSWORD}"]) {
                         bat '''
                         set LOGIN_EMAIL=${LOGIN_EMAIL}
                         set LOGIN_PASSWORD=${LOGIN_PASSWORD}

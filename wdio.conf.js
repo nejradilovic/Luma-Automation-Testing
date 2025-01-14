@@ -20,6 +20,10 @@ exports.config = {
   // The path of the spec files will be resolved relative from the directory of
   // of the config file unless it's absolute.
   //
+  before: function () {
+    global.email = process.env.LOGIN_EMAIL;
+    global.password = process.env.LOGIN_PASSWORD;
+  },
   specs: ["./test/specs/**/*.js"],
   // Patterns to exclude.
   exclude: [
