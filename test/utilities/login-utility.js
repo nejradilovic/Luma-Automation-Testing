@@ -12,10 +12,11 @@ class LoginUtility extends CommonUtility {
   }
 
   async verifySuccessfulLogin() {
+    const expectedMessage = `Welcome, ${testData.existingUser.firstName} ${testData.existingUser.lastName}!`;
     if (await HomePage.welcomeMessage.isExisting()) {
       const isDisplayed = await HomePage.welcomeMessage.isDisplayed();
       if (isDisplayed) {
-          const actualMessage = await HomePage.welcomeMessage.getText();
+          const actualMessage = await HomePage.welcomeMessage;
           await this.verifyMessage(actualMessage, expectedMessage);
       }
     }

@@ -22,10 +22,12 @@ class BaseElement {
   }
 
   async isDisplayed() {
+    await this.element.waitForDisplayed();
     return await this.element.isDisplayed();
   }
 
   async isExisting() {
+    await this.element.waitForExist();
     return await this.element.isExisting();
   }
 
