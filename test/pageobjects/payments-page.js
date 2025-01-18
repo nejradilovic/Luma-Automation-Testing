@@ -12,7 +12,12 @@ class PaymentsPage extends Page {
     }
 
     async placeOrder() {
-        if(this.buttonPlaceOrder.isDisplayed()) await this.buttonPlaceOrder.click();
+        if (await this.buttonPlaceOrder.isExisting()) {
+          const isDisplayed = await this.buttonPlaceOrder.isDisplayed();
+          if (isDisplayed) {
+            await this.buttonPlaceOrder.click();
+          }
+        }
     }
 }
 
