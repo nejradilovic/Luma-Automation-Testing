@@ -13,8 +13,7 @@ pipeline {
         stage('Create .env File') {
             steps {
                 script {
-                    writeFile file: '.env', text: """
-                    LOGIN_EMAIL=${env.LOGIN_EMAIL}
+                    writeFile file: '.env', text: """LOGIN_EMAIL=${env.LOGIN_EMAIL}
                     LOGIN_PASSWORD=${env.LOGIN_PASSWORD}
                     """
                     echo '.env file created successfully.'
@@ -24,13 +23,14 @@ pipeline {
         stage('Install Dependencies') {
             steps {
                 bat 'npm install'
+                bat 'npm install chromedriver@131.0.6778.65'
             }
         }
         stage('Run Smoke Tests') {
             steps {
                 script {
-                    echo 'LOGIN_EMAIL: ${env.LOGIN_EMAIL}'
-                    echo 'LOGIN_PASSWORD: ${env.LOGIN_PASSWORD}'
+                    echo "LOGIN_EMAIL: ${env.LOGIN_EMAIL}"
+                    echo "LOGIN_PASSWORD: ${env.LOGIN_PASSWORD}"
                 }
                 bat 'npx wdio run wdio.conf.js --spec ./test/specs/smoke-test.js'
             }
