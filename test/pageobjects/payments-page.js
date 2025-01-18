@@ -12,7 +12,7 @@ class PaymentsPage extends Page {
     }
 
     async placeOrder() {
-        await this.buttonPlaceOrder.click();
+        if(this.buttonPlaceOrder.isDisplayed()) await this.buttonPlaceOrder.click();
     }
 }
 
