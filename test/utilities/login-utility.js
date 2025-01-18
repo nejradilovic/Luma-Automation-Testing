@@ -19,9 +19,6 @@ class LoginUtility extends CommonUtility {
           await this.verifyMessage(actualMessage, expectedMessage);
       }
     }
-    //const expectedMessage = `Welcome, ${testData.existingUser.firstName} ${testData.existingUser.lastName}!`;
-    //const actualMessage = await HomePage.welcomeMessage.waitForDisplayed();
-    //await this.verifyMessage(actualMessage, expectedMessage);
   }
 
   async verifyRequiredFieldErrors() {
