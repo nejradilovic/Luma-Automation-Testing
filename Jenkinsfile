@@ -10,6 +10,17 @@ pipeline {
                 checkout scm
             }
         }
+        stage('Create .env File') {
+            steps {
+                script {
+                    writeFile file: '.env', text: """
+                    LOGIN_EMAIL=${env.LOGIN_EMAIL}
+                    LOGIN_PASSWORD=${env.LOGIN_PASSWORD}
+                    """
+                    echo '.env file created successfully.'
+                }
+            }
+        }
         stage('Install Dependencies') {
             steps {
                 bat 'npm install'
@@ -18,12 +29,12 @@ pipeline {
         stage('Run Smoke Tests') {
             steps {
                 script {
-                    echo 'Email: ${env.LOGIN_EMAIL}'
-                    echo 'Password: ${env.LOGIN_PASSWORD}'
+                    echo 'LOGIN_EMAIL: ${env.LOGIN_EMAIL}'
+                    echo 'LOGIN_PASSWORD: ${env.LOGIN_PASSWORD}'
                 }
-                bat 'npx wdio run wdio.conf.js --spec ./test/specs/smoke-test.js --email=${env.LOGIN_EMAIL} --password=${env.LOGIN_PASSWORD}'
+                bat 'npx wdio run wdio.conf.js --spec ./test/specs/smoke-test.js'
             }
-        } 
+        }
     }
     post {
         always {
