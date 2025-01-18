@@ -12,6 +12,7 @@ class BaseElement {
   }
 
   async click() {
+    await this.element.waitForExist();
     await this.element.waitForClickable();
     await this.element.click();
   }
