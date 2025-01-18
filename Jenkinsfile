@@ -13,9 +13,10 @@ pipeline {
         stage('Create .env File') {
             steps {
                 script {
-                    writeFile file: '.env', text: """LOGIN_EMAIL=${env.LOGIN_EMAIL}
-LOGIN_PASSWORD=${env.LOGIN_PASSWORD}
-"""
+                    writeFile file: '.env', text: """
+                    LOGIN_EMAIL=${env.LOGIN_EMAIL}
+                    LOGIN_PASSWORD=${env.LOGIN_PASSWORD}
+                    """
                     echo '.env file created successfully.'
                 }
             }
@@ -23,15 +24,13 @@ LOGIN_PASSWORD=${env.LOGIN_PASSWORD}
         stage('Install Dependencies') {
             steps {
                 bat 'npm install'
-                bat 'npm install webdriver-manager'
-                bat 'npx webdriver-manager update'
             }
         }
         stage('Run Smoke Tests') {
             steps {
                 script {
-                    echo "LOGIN_EMAIL: ${env.LOGIN_EMAIL}"
-                    echo "LOGIN_PASSWORD: ${env.LOGIN_PASSWORD}"
+                    echo 'LOGIN_EMAIL: ${env.LOGIN_EMAIL}'
+                    echo 'LOGIN_PASSWORD: ${env.LOGIN_PASSWORD}'
                 }
                 bat 'npx wdio run wdio.conf.js --spec ./test/specs/smoke-test.js'
             }
