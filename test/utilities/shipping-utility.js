@@ -8,7 +8,7 @@ class ShippingUtility extends CommonUtility {
     await ShippingPage.fillShippingForm(streetAddress, city, postalCode, phoneNumber, country);
     await PaymentsPage.placeOrder();
     
-    await SuccessPage.continueShoppingButton.waitForClickable();
+    await SuccessPage.continueShoppingButton.waitForExist();
     
     const confirmationMessageSelector = SuccessPage.spanThankYouMessage;
     const expectedMessage = "Thank you for your purchase!";
