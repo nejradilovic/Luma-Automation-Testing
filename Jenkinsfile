@@ -7,32 +7,43 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                checkout scm
+                script {
+                    // Kloniranje repozitorijuma
+                    bat 'git clone https://github.com/nejradilovic/Luma-Automation-Testing.git'
+                    dir('Luma-Automation-Testing') {
+                        echo 'Repository cloned successfully.'
+                    }
+                }
             }
         }
         stage('Create .env File') {
             steps {
                 script {
-                    writeFile file: '.env', text: """
-                    LOGIN_EMAIL=${env.LOGIN_EMAIL}
-                    LOGIN_PASSWORD=${env.LOGIN_PASSWORD}
-                    """
+                    writeFile file: 'Luma-Automation-Testing/.env', text: """LOGIN_EMAIL=${env.LOGIN_EMAIL}
+LOGIN_PASSWORD=${env.LOGIN_PASSWORD}
+"""
                     echo '.env file created successfully.'
                 }
             }
         }
         stage('Install Dependencies') {
             steps {
-                bat 'npm install'
+                script {
+                    dir('Luma-Automation-Testing') {
+                        bat 'npm install'
+                    }
+                }
             }
         }
         stage('Run Smoke Tests') {
             steps {
                 script {
-                    echo 'LOGIN_EMAIL: ${env.LOGIN_EMAIL}'
-                    echo 'LOGIN_PASSWORD: ${env.LOGIN_PASSWORD}'
+                    echo "LOGIN_EMAIL: ${env.LOGIN_EMAIL}"
+                    echo "LOGIN_PASSWORD: ${env.LOGIN_PASSWORD}"
+                    dir('Luma-Automation-Testing') {
+                        bat 'npx wdio run wdio.conf.js --spec ./test/specs/smoke-test.js'
+                    }
                 }
-                bat 'npx wdio run wdio.conf.js --spec ./test/specs/smoke-test.js'
             }
         }
     }
