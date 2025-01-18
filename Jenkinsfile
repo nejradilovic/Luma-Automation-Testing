@@ -41,7 +41,7 @@ LOGIN_PASSWORD=${env.LOGIN_PASSWORD}
                     echo "LOGIN_EMAIL: ${env.LOGIN_EMAIL}"
                     echo "LOGIN_PASSWORD: ${env.LOGIN_PASSWORD}"
                     dir('Luma-Automation-Testing') {
-                        bat 'start "" /D C:\\Xvfb "Xvfb :99" & DISPLAY=:99 npx wdio run wdio.conf.js --spec ./test/specs/smoke-test.js'
+                        bat 'npx wdio run wdio.conf.js --spec ./test/specs/smoke-test.js'
                     }
                 }
             }
@@ -59,3 +59,9 @@ LOGIN_PASSWORD=${env.LOGIN_PASSWORD}
         }
     }
 }
+
+
+
+
+
+
