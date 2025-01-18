@@ -14,8 +14,8 @@ pipeline {
             steps {
                 script {
                     writeFile file: '.env', text: """LOGIN_EMAIL=${env.LOGIN_EMAIL}
-                    LOGIN_PASSWORD=${env.LOGIN_PASSWORD}
-                    """
+LOGIN_PASSWORD=${env.LOGIN_PASSWORD}
+"""
                     echo '.env file created successfully.'
                 }
             }
@@ -23,7 +23,8 @@ pipeline {
         stage('Install Dependencies') {
             steps {
                 bat 'npm install'
-                bat 'npm install chromedriver@131.0.6778.65'
+                bat 'npm install webdriver-manager'
+                bat 'npx webdriver-manager update'
             }
         }
         stage('Run Smoke Tests') {
