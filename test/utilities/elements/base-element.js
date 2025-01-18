@@ -25,6 +25,10 @@ class BaseElement {
     return await this.element.isDisplayed();
   }
 
+  async isExisting() {
+    return await this.element.isExisting();
+  }
+
   async waitForClickable() {
     await this.element.waitForClickable();
   }
