@@ -12,7 +12,6 @@ class PaymentsPage extends Page {
     }
 
     async placeOrder() {
-        await this.buttonPlaceOrder.waitForDisplayed();
         if (await this.buttonPlaceOrder.isExisting()) {
           const isDisplayed = await this.buttonPlaceOrder.isDisplayed();
           if (isDisplayed) {
