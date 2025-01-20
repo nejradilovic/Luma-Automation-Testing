@@ -20,6 +20,7 @@ exports.config = {
   // The path of the spec files will be resolved relative from the directory of
   // of the config file unless it's absolute.
   //
+  logLevel: 'debug',
   before: function () {
     if (!process.env.LOGIN_EMAIL || !process.env.LOGIN_PASSWORD) {
         throw new Error("LOGIN_EMAIL ili LOGIN_PASSWORD environment varijable nisu definisane!");
