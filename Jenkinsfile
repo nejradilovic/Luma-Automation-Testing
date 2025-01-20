@@ -38,7 +38,7 @@ pipeline {
                     echo "LOGIN_EMAIL: ${env.LOGIN_EMAIL}"
                     echo "LOGIN_PASSWORD: ${env.LOGIN_PASSWORD}"
                     dir('Luma-Automation-Testing') {
-                        bat 'sleep'
+                        bat 'timeout /t 60 /nobreak'
                     }
                 }
             }
