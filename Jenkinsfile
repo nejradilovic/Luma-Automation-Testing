@@ -38,7 +38,7 @@ pipeline {
                     echo "LOGIN_EMAIL: ${env.LOGIN_EMAIL}"
                     echo "LOGIN_PASSWORD: ${env.LOGIN_PASSWORD}"
                     dir('Luma-Automation-Testing') {
-                        bat 'timeout /t 60 /nobreak'
+                        bat 'npx wdio run wdio.conf.js --spec ./test/specs/smoke-test.js'
                     }
                 }
             }
