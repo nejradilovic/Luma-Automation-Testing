@@ -8,7 +8,6 @@ pipeline {
         stage('Checkout') {
             steps {
                 script {
-                    // Kloniranje repozitorijuma sa specificiranim branch-om
                     bat 'git clone --branch jenkins-credentials https://github.com/nejradilovic/Luma-Automation-Testing.git'
                     dir('Luma-Automation-Testing') {
                         echo 'Repository cloned successfully from branch jenkins-credentials.'
@@ -19,9 +18,7 @@ pipeline {
         stage('Create .env File') {
             steps {
                 script {
-                    writeFile file: 'Luma-Automation-Testing/.env', text: """LOGIN_EMAIL=${env.LOGIN_EMAIL}
-LOGIN_PASSWORD=${env.LOGIN_PASSWORD}
-"""
+                    writeFile file: 'Luma-Automation-Testing/.env', text: """LOGIN_EMAIL=${env.LOGIN_EMAIL} LOGIN_PASSWORD=${env.LOGIN_PASSWORD}"""
                     echo '.env file created successfully.'
                 }
             }
@@ -59,9 +56,3 @@ LOGIN_PASSWORD=${env.LOGIN_PASSWORD}
         }
     }
 }
-
-
-
-
-
-

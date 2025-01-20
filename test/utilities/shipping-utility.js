@@ -6,11 +6,8 @@ const CommonUtility = require("./common-utility");
 class ShippingUtility extends CommonUtility {
   async completePurchase(streetAddress, city, postalCode, phoneNumber, country) {
     await ShippingPage.fillShippingForm(streetAddress, city, postalCode, phoneNumber, country);
-    if(await PaymentsPage.buttonPlaceOrder.isExisting()){
-      if(await PaymentsPage.buttonPlaceOrder.isDisplayed()) await PaymentsPage.buttonPlaceOrder.click();
-    }
-    
-    await SuccessPage.continueShoppingButton.waitForExist();
+    await PaymentsPage.placeOrder();
+    await SuccessPage.continueShoppingButton.waitForClickable();
     
     const confirmationMessageSelector = SuccessPage.spanThankYouMessage;
     const expectedMessage = "Thank you for your purchase!";
