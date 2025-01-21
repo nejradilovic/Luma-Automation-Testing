@@ -43,15 +43,6 @@ pipeline {
                 }
             }
         }
-        stage('Generate Allure Report') {
-            steps {
-                script {
-                    dir('Luma-Automation-Testing') {
-                        bat 'npx allure generate allure-results'
-                    }
-                }
-            }
-        }
     }
     post {
         always {
@@ -59,15 +50,9 @@ pipeline {
         }
         success {
             echo "Smoke tests passed successfully!"
-            script {
-                allure includeProperties: false, jdk: '', results: [[path: 'Luma-Automation-Testing/allure-results']]
-            }
         }
         failure {
             echo "Smoke tests failed. Check logs for more details."
-            script {
-                allure includeProperties: false, jdk: '', results: [[path: 'Luma-Automation-Testing/allure-results']]
-            }
         }
     }
 }
