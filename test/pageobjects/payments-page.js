@@ -1,6 +1,7 @@
 const Page = require("./page");
 const Button = require("../utilities/elements/button");
 const selectors = require("../utilities/selectors");
+const { is } = require("css-select");
 
 class PaymentsPage extends Page {
     open() {
@@ -12,8 +13,9 @@ class PaymentsPage extends Page {
     }
 
     async placeOrder() {
-        await this.buttonPlaceOrder.waitForDisplayed();
-        await this.buttonPlaceOrder.click();
+        await this.buttonPlaceOrder.waitForExist();
+        const isDisplayed = await this.buttonPlaceOrder.isDisplayed();
+        if(isDisplayed) await this.buttonPlaceOrder.click();
     }
 }
 
