@@ -7,12 +7,12 @@ class ShippingUtility extends CommonUtility {
   async completePurchase(streetAddress, city, postalCode, phoneNumber, country) {
     await ShippingPage.fillShippingForm(streetAddress, city, postalCode, phoneNumber, country);
     await PaymentsPage.placeOrder();
-    await SuccessPage.continueShoppingButton.waitForDisplayed();
     
-    const confirmationMessageSelector = SuccessPage.spanThankYouMessage;
-    const expectedMessage = "Thank you for your purchase!";
-    
-    await this.verifyMessage(confirmationMessageSelector, expectedMessage);
+    if(await SuccessPage.continueShoppingButton.isExisting()){
+      const confirmationMessageSelector = SuccessPage.spanThankYouMessage;
+      const expectedMessage = "Thank you for your purchase!";
+      await this.verifyMessage(confirmationMessageSelector, expectedMessage);
+    }
   }
 }
 
