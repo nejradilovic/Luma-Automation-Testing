@@ -7,6 +7,7 @@ class CommonUtility {
   }
 
   async verifyMessage(messageSelector, expectedMessage) {
+    await messageSelector.waitForDisplayed({ timeout: 30000 }); 
     const actualMessage = await messageSelector.getText();
     expect(actualMessage).toContain(expectedMessage);
   }
