@@ -12,6 +12,7 @@ class PaymentsPage extends Page {
     }
 
     async placeOrder() {
+        await this.buttonPlaceOrder.waitForDisplayed();
         await this.buttonPlaceOrder.click();
     }
 }
