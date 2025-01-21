@@ -47,7 +47,7 @@ pipeline {
             steps {
                 script {
                     dir('Luma-Automation-Testing') {
-                        bat 'npx allure generate allure-results --clean'
+                        bat 'npx allure generate allure-results'
                     }
                 }
             }
